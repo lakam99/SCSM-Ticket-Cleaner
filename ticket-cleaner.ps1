@@ -102,7 +102,7 @@ function get-resolved-and-completed {
     Write-Host -ForegroundColor Yellow "Now working on Incidents.";
     $resolved_inc = Get-SCSMClassInstance -ComputerName $global:config.server -Class $global:classes.inc.class | ?{$_.Status.DisplayName -eq $global:classes.inc.search};
     Write-Host -ForegroundColor Yellow "Now working on service requests.";
-    $completed_srq = Get-SCSMClassInstance -ComputerName $global:config.server -Class $global:classes.srq.class | ?{$global:classes.srq.search -notcontains $_.Status.DisplayName};
+    $completed_srq = Get-SCSMClassInstance -ComputerName $global:config.server -Class $global:classes.srq.class | ?{$global:classes.srq.search -contains $_.Status.DisplayName};
     Write-Host -ForegroundColor Yellow "Now combining lists.";
     $completed_tickets = $resolved_inc + $completed_inc;
     Write-Host -ForegroundColor Yellow "Now retrieving IDs of tickets.";
